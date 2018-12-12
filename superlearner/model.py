@@ -2,13 +2,13 @@ from sklearn.base import BaseEstimator
 from sklearn.model_selection import cross_val_predict, KFold
 import numpy as np
 from copy import deepcopy
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.base import BaseEstimator
 
 class SuperLearnerRegressor(BaseEstimator):
     def __init__(self, base_learners, k_folds=3):
         self.base_learners = base_learners
-        self.meta_learner = LinearRegression()
+        self.meta_learner = Lasso(alpha=0, positive=True)
         self.k_folds = k_folds
         self.trained_learners_ = None
         self.trained_meta_learner_ = None
